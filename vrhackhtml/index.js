@@ -1,5 +1,14 @@
 var vrView = 0
-window.addEventListener('load', onVrViewLoad)
+var text = "Read it"
+var player = 0
+
+window.addEventListener('load', setUponLoad)
+function setUponLoad(){
+	onVrViewLoad();
+	player = document.querySelector('audio#player');
+	console.log('player setup',player);
+	player.onended = readEnded;
+}
         function onVrViewLoad() {
             	vrView = new VRView.Player('#vrview', {
                 video: 'http://192.168.1.253:9000/video/1.mp4',
@@ -11,7 +20,8 @@ window.addEventListener('load', onVrViewLoad)
         }
 
 function GrabObjects() {
-	document.getElementById("text").innerText = "Got a string about Objects"
+
+	document.getElementById("text").innerText = text
 }
 
 function PauseVideo(el) {
@@ -29,7 +39,23 @@ function PauseVideo(el) {
 	
 }
 
-function PlayWords(str){
-
+function readEnded(){
+	console.log("reading ended");
+	var el = document.getElementById("voice");
+	el.setAttribute('reading','false');
+	el.innerHTML = 'Read'
+}
+function PlayWords(el){
+	
+	if(el.getAttribute('reading')=='false'){
+		player.src = 'https://getpronounce.com/api/text-to-speech?text=' + encodeURIComponent(text);	
+		el.setAttribute('reading','true');
+		el.innerHTML = 'Stop'
+	} else {
+		player.pause();
+		el.setAttribute('reading','false');
+		el.innerHTML = 'Read'
+	}
+	
 
 }

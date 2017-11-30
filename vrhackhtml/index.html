@@ -11,9 +11,10 @@
     <div id="container" >
         <div id="vrview" style="width: 100%; height: 100%">
             <div id="playbar">
+                <audio id="player" autoplay></audio>
                 <button onClick="PauseVideo(this)" videoPlaying=true>Pause</button>
                 <button onClick="GrabObjects()" >Capture</button>
-                <button onClick="PlayWords()">Play</button>
+                <button id="voice" onClick="PlayWords(this)" reading=false>Read</button>
             </div>
         </div>
     </div>
