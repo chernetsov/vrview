@@ -1,5 +1,6 @@
 # Project custom ignores
 .DS_Store
+config.codekit3
 *.swp
 *.swo
 build
